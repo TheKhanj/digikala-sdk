@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "id",
+    "first_name",
+    "last_name",
+    "phone",
+    "city_id",
+    "mobile",
+    "email",
+    "avatar_url",
+    "is_legal",
+    "is_foreigner",
+    "has_password",
+    "hashed_user_id",
+    "verification_status",
+    "national_identity_number",
+    "gender",
+    "birthday_iso",
+    "city_name",
+    "state_name",
+    "phone_hash"
+  ],
+  "properties": {
+    "id": {
+      "type": "integer"
+    },
+    "first_name": {
+      "type": "string"
+    },
+    "last_name": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "city_id": {
+      "type": "integer"
+    },
+    "mobile": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "avatar_url": {
+      "type": "string"
+    },
+    "hashed_user_id": {
+      "type": "string"
+    },
+    "verification_status": {
+      "type": "string"
+    },
+    "national_identity_number": {
+      "type": "string"
+    },
+    "gender": {
+      "type": "string"
+    },
+    "birthday_iso": {
+      "type": "string"
+    },
+    "city_name": {
+      "type": "string"
+    },
+    "state_name": {
+      "type": "string"
+    },
+    "phone_hash": {
+      "type": "string"
+    },
+    "is_legal": {
+      "type": "boolean"
+    },
+    "is_foreigner": {
+      "type": "boolean"
+    },
+    "has_password": {
+      "type": "boolean"
+    }
+  }
+}
