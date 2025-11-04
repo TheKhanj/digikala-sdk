@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "id",
+    "name",
+    "full_name",
+    "address",
+    "postal_code",
+    "telephone",
+    "mobile",
+    "city_id",
+    "state_id",
+    "support_fmcg",
+    "is_default",
+    "latitude",
+    "longitude",
+    "building_number",
+    "map_image",
+    "is_usable",
+    "is_general_location_jet_eligible",
+    "is_accurate"
+  ],
+  "properties": {
+    "id": {
+      "type": "integer"
+    },
+    "name": {
+      "type": "string"
+    },
+    "full_name": {
+      "type": "string"
+    },
+    "address": {
+      "type": "string"
+    },
+    "postal_code": {
+      "type": "string"
+    },
+    "telephone": {
+      "type": "string"
+    },
+    "mobile": {
+      "type": "string"
+    },
+    "city_id": {
+      "type": "integer"
+    },
+    "state_id": {
+      "type": "integer"
+    },
+    "support_fmcg": {
+      "type": "boolean"
+    },
+    "is_default": {
+      "type": "boolean"
+    },
+    "latitude": {
+      "type": "number"
+    },
+    "longitude": {
+      "type": "number"
+    },
+    "building_number": {
+      "type": "string"
+    },
+    "map_image": {
+      "type": "object",
+      "description": "TODO"
+    },
+    "is_usable": {
+      "type": "boolean"
+    },
+    "is_general_location_jet_eligible": {
+      "type": "boolean"
+    },
+    "is_accurate": {
+      "type": "boolean"
+    }
+  }
+}
