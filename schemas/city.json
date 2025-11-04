@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "id",
+    "state_id",
+    "name"
+  ],
+  "properties": {
+    "id": {
+      "type": "integer"
+    },
+    "state_id": {
+      "type": "integer"
+    },
+    "name": {
+      "type": "string"
+    }
+  }
+}
