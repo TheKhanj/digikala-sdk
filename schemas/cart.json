@@ -1,0 +1,145 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "id",
+    "state_id",
+    "name"
+  ],
+  "properties": {
+    "id": {
+      "type": "integer"
+    },
+    "items_count": {
+      "type": "integer"
+    },
+    "payable_price": {
+      "type": "integer"
+    },
+    "digiclub": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "points"
+      ],
+      "properties": {
+        "points": {
+          "type": "integer"
+        }
+      }
+    },
+    "cash_back": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "amount",
+        "digiplus_amount",
+        "return_days"
+      ],
+      "properties": {
+        "amount": {
+          "type": "integer"
+        },
+        "digiplus_amount": {
+          "type": "integer"
+        },
+        "return_days": {
+          "type": "integer"
+        }
+      }
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/CartItem"
+      }
+    },
+    "bnpl_active": {
+      "type": "boolean"
+    },
+    "details_modal": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "title",
+        "description",
+        "notice"
+      ],
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "notice": {
+          "type": "string"
+        }
+      }
+    },
+    "bill_box": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "title"
+      ],
+      "properties": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "rrp_price": {
+      "type": "integer"
+    },
+    "shipping_cost": {
+      "type": "integer"
+    },
+    "voucher_discount": {
+      "type": "integer"
+    },
+    "voucher_discount_hint": "",
+    "shipping_cost_discount": {
+      "type": "integer"
+    },
+    "items_discount": {
+      "type": "integer"
+    },
+    "total_discount": {
+      "type": "integer"
+    },
+    "insurance": {
+      "$ref": "#/definitions/CartDiscount"
+    },
+    "dk_service": {
+      "$ref": "#/definitions/CartDiscount"
+    },
+    "delivery_package": {
+      "$ref": "#/definitions/CartDiscount"
+    }
+  },
+  "definitions": {
+    "CartDiscount": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "amount",
+        "discount"
+      ],
+      "properties": {
+        "amount": {
+          "type": "integer"
+        },
+        "discount": {
+          "type": "integer"
+        }
+      }
+    },
+    "CartItem": {
+      "type": "object",
+      "additionalProperties": true,
+      "description": "TODO"
+    }
+  }
+}

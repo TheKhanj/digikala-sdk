@@ -67,6 +67,7 @@
     },
     "map_image": {
       "type": "object",
+      "additionalProperties": true,
       "description": "TODO"
     },
     "is_usable": {
