@@ -4,7 +4,7 @@ import (
 	"net/http"
 	"testing"
 
-	"github.com/thekhanj/digikala-api/cli/internal"
+	"github.com/thekhanj/digikala-sdk/cli/internal"
 )
 
 func TestFetchProducts(t *testing.T) {

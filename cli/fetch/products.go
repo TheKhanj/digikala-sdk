@@ -12,9 +12,9 @@ import (
 	"regexp"
 	"strconv"
 
-	"github.com/thekhanj/digikala-api/cli/internal"
-	"github.com/thekhanj/digikala-api/cli/jq"
-	"github.com/thekhanj/digikala-api/cli/proxy"
+	"github.com/thekhanj/digikala-sdk/cli/internal"
+	"github.com/thekhanj/digikala-sdk/cli/proxy"
+	"github.com/thekhanj/go-jq"
 )
 
 type Products struct {
@@ -47,7 +47,11 @@ func (this *Products) fetchProduct(url string) ([]byte, error) {
 		return nil, err
 	}
 
-	return jq.NewJq(bytes, ".").Start()
+	j, err := jq.NewJq(jq.WithFileData(bytes), jq.WithFilterString("."))
+	if err != nil {
+		return nil, err
+	}
+	return j.Exec()
 }
 
 func (this *Products) saveBody(index int, url string, body []byte) error {

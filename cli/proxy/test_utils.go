@@ -4,7 +4,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/thekhanj/digikala-api/cli/config"
+	"github.com/thekhanj/digikala-sdk/cli/config"
 )
 
 func getTestProxies() ([]string, error) {

@@ -3,7 +3,7 @@ package config
 import (
 	"path"
 
-	"github.com/thekhanj/digikala-api/cli/internal"
+	"github.com/thekhanj/digikala-sdk/cli/internal"
 )
 
 func ReadTestConfig() (*Config, error) {

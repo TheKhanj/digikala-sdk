@@ -7,9 +7,9 @@ import (
 	"os"
 	"time"
 
-	"github.com/thekhanj/digikala-api/cli/config"
-	"github.com/thekhanj/digikala-api/cli/fetch"
-	"github.com/thekhanj/digikala-api/cli/proxy"
+	"github.com/thekhanj/digikala-sdk/cli/config"
+	"github.com/thekhanj/digikala-sdk/cli/fetch"
+	"github.com/thekhanj/digikala-sdk/cli/proxy"
 )
 
 type Cli struct {

@@ -65,7 +65,7 @@ func GetProcDir() string {
 	if uid := syscall.Getuid(); uid == 0 {
 		return fmt.Sprintf("/var/run/digkala-api/%d", os.Getpid())
 	} else {
-		return fmt.Sprintf("/run/user/%d/digikala-api/%d", uid, os.Getpid())
+		return fmt.Sprintf("/run/user/%d/digikala-sdk/%d", uid, os.Getpid())
 	}
 }
 

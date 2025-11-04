@@ -7,7 +7,7 @@ import (
 	"os/exec"
 	"strings"
 
-	"github.com/thekhanj/digikala-api/cli/internal"
+	"github.com/thekhanj/digikala-sdk/cli/internal"
 )
 
 func (this ProxyCmd) logStderr(bytes []byte) {
