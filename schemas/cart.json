@@ -52,7 +52,7 @@
     "items": {
       "type": "array",
       "items": {
-        "$ref": "#/definitions/CartItem"
+        "$ref": "./cart-item.json"
       }
     },
     "bnpl_active": {
@@ -99,7 +99,9 @@
     "voucher_discount": {
       "type": "integer"
     },
-    "voucher_discount_hint": "",
+    "voucher_discount_hint": {
+      "type": "string"
+    },
     "shipping_cost_discount": {
       "type": "integer"
     },
@@ -135,11 +137,6 @@
           "type": "integer"
         }
       }
-    },
-    "CartItem": {
-      "type": "object",
-      "additionalProperties": true,
-      "description": "TODO"
     }
   }
 }
