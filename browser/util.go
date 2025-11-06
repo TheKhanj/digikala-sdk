@@ -1,4 +1,4 @@
-package chromedp
+package browser
 
 import (
 	"context"
