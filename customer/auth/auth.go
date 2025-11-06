@@ -109,8 +109,19 @@ func (this *Auth) pullCookies(
 	ret := make([]http.Cookie, 0)
 
 	err := chromedp.Run(ctx,
+		chromedp.Sleep(this.readyDelay),
 		chromedp.ActionFunc(func(ctx context.Context) error {
-			cookies, err := network.GetCookies().Do(ctx)
+			cookies, err := network.GetCookies().
+				WithURLs([]string{
+					"https://digikala.com",
+					"https://www.digikala.com",
+					"https://.digikala.com",
+					"https://api.digikala.com",
+					"https://.api.digikala.com",
+					"https://tracker.digikala.com",
+					"https://.api-dwid.digiwise.ir",
+				}).
+				Do(ctx)
 			if err != nil {
 				return err
 			}

@@ -24,9 +24,9 @@ func TestBrowser(t *testing.T) {
 	defer cancel2()
 
 	proxy := HttpProxy{
-		common.GetMandatoryEnv("TEST_HTTP_PROXY_USER"),
-		common.GetMandatoryEnv("TEST_HTTP_PROXY_PASSWORD"),
-		common.GetMandatoryEnv("TEST_HTTP_PROXY_ADDRESS"),
+		User:     common.GetMandatoryEnv("TEST_HTTP_PROXY_USER"),
+		Password: common.GetMandatoryEnv("TEST_HTTP_PROXY_PASSWORD"),
+		Address:  common.GetMandatoryEnv("TEST_HTTP_PROXY_ADDRESS"),
 	}
 	b := NewBrowser(
 		WithHeadless(false),

@@ -1,28 +1,35 @@
 package auth
 
 import (
-	"os"
+	"errors"
 	"testing"
 
-	"github.com/thekhanj/digikala-sdk/chromedp"
+	"github.com/thekhanj/digikala-sdk/browser"
+	"github.com/thekhanj/digikala-sdk/common"
 )
 
 func TestAuth(t *testing.T) {
-	tab, cancel := chromedp.NewTab(t.Context())
-	defer cancel()
+	proxy := browser.HttpProxy{
+		User:     common.GetMandatoryEnv("TEST_HTTP_PROXY_USER"),
+		Password: common.GetMandatoryEnv("TEST_HTTP_PROXY_PASSWORD"),
+		Address:  common.GetMandatoryEnv("TEST_HTTP_PROXY_ADDRESS"),
+	}
+	b := browser.NewBrowser(
+		browser.WithHeadless(false),
+		browser.WithHttpProxy(proxy),
+	)
+	b.Run(t.Context())
+
+	tab, err := b.NewTab()
+	if err != nil {
+		t.Fatal(err)
+		return
+	}
 
 	auth := NewAuth(tab)
 
-	username := os.Getenv("TEST_CUSTOMER_USERNAME")
-	password := os.Getenv("TEST_CUSTOMER_PASSWORD")
-	if username == "" {
-		t.Fatal("Empty username was passed to the test")
-		return
-	}
-	if password == "" {
-		t.Fatal("Empty password was passed to the test")
-		return
-	}
+	username := common.GetMandatoryEnv("TEST_CUSTOMER_USERNAME")
+	password := common.GetMandatoryEnv("TEST_CUSTOMER_PASSWORD")
 	cookies, err := auth.Login(username, password)
 	if err != nil {
 		t.Fatal(err)
@@ -35,4 +42,17 @@ func TestAuth(t *testing.T) {
 	}
 
 	t.Log(cookies)
+
+	found := false
+	for _, cookie := range cookies {
+		if cookie.Name == "DK_ACCESS_TOKEN" {
+			found = true
+			break
+		}
+	}
+
+	if !found {
+		t.Fatal(errors.New("DK_ACCESS_TOKEN cookie not found!"))
+		return
+	}
 }
