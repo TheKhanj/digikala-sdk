@@ -1,0 +1,102 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "is_logged_in",
+    "digiclub",
+    "digiplus",
+    "notification",
+    "user",
+    "default_address",
+    "data_layer",
+    "city",
+    "show_location_modal",
+    "modules",
+    "date_time",
+    "social_profile",
+    "cart",
+    "cart_items"
+  ],
+  "properties": {
+    "is_logged_in": {
+      "type": "boolean"
+    },
+    "digiclub": {
+      "type": "object",
+      "additionalProperties": true,
+      "description": "TODO"
+    },
+    "digiplus": {
+      "type": "object",
+      "additionalProperties": true,
+      "description": "TODO"
+    },
+    "notification": {
+      "type": "object",
+      "additionalProperties": true,
+      "description": "TODO"
+    },
+    "user": {
+      "$ref": "../../../../schemas/user.json"
+    },
+    "default_address": {
+      "$ref": "../../../../schemas/address.json"
+    },
+    "data_layer": {
+      "type": "object",
+      "additionalProperties": true,
+      "description": "TODO"
+    },
+    "city": {
+      "$ref": "../../../../schemas/city.json"
+    },
+    "show_location_modal": {
+      "type": "boolean"
+    },
+    "modules": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true,
+        "description": "TODO"
+      }
+    },
+    "date_time": {
+      "type": "string"
+    },
+    "social_profile": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "is_activated",
+        "name",
+        "username",
+        "user_image"
+      ],
+      "properties": {
+        "is_activated": {
+          "type": "boolean"
+        },
+        "name": {
+          "type": "string"
+        },
+        "username": {
+          "type": "string"
+        },
+        "user_image": {
+          "type": "string"
+        }
+      }
+    },
+    "cart": {
+      "$ref": "../../../../schemas/cart.json"
+    },
+    "cart_items": {
+      "type": "array",
+      "items": {
+        "$ref": "../../../../schemas/cart-item.json"
+      }
+    }
+  }
+}
