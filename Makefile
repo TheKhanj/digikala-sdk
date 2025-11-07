@@ -6,7 +6,7 @@ GO_SRC_FILES = $(shell find cli -name '*.go') \
 
 SCHEMAS = $(shell find schemas -name '*.json')
 API_SCHEMAS = $(shell find api -name '*.json')
-API_GO_SRC_FILES = $(shell find api -name '*.go')
+API_GO_SRC_FILES = $(shell find api -name '*.go' | grep -v 'api.go' | grep -v 'schemas.go')
 
 all: cli openapi.json
 
@@ -25,10 +25,23 @@ clean-go-config:
 	rm $(GO_CONFIG)
 
 api-gen: $(API_GO_SRC_FILES)
-	go build -o $@ ./api
+	go build -o $@ ./api/cli
+
+api/api.go: openapi.json
+	oapi-codegen -generate "client" \
+		-o api/api.go \
+		-package api openapi.json
 
 openapi.json: api-gen $(SCHEMAS) $(API_SCHEMAS)
 	./api-gen api/openapi.json >$@
+
+api/schemas: openapi.json
+	cat $< \
+		| jq '{ "type": "object", "definitions": .components.schemas }' \
+		| sed 's|/components/schemas|/definitions|' > $@
+
+api/schemas.go: api/schemas
+	go run github.com/atombender/go-jsonschema@latest -p api $< > $@
 
 $(GO_CONFIG): $(CONFIG_SCHEMA)
 	dir=$$(mktemp -d) && \

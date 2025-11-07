@@ -4,6 +4,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
+
+	"github.com/thekhanj/digikala-sdk/api/parser"
 )
 
 const (
@@ -12,7 +14,7 @@ const (
 )
 
 func parseFile(filePath string) error {
-	p, err := NewParser()
+	p, err := parser.NewParser()
 	if err != nil {
 		return err
 	}
