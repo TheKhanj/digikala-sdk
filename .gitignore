@@ -2,3 +2,5 @@
 /test/.cache
 /.cache
 /bin
+/openapi.json
+/api-gen
