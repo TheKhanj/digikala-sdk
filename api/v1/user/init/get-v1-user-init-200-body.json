@@ -56,11 +56,7 @@
     },
     "modules": {
       "type": "array",
-      "items": {
-        "type": "object",
-        "additionalProperties": true,
-        "description": "TODO"
-      }
+      "items": {}
     },
     "date_time": {
       "type": "string"

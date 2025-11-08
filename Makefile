@@ -24,13 +24,17 @@ clean: clean-go-config
 clean-go-config:
 	rm $(GO_CONFIG)
 
+api: api/api.go api/schemas.go
+
 api-gen: $(API_GO_SRC_FILES)
 	go build -o $@ ./api/cli
 
 api/api.go: openapi.json
-	oapi-codegen -generate "client" \
-		-o api/api.go \
-		-package api openapi.json
+	go run github.com/oapi-codegen/oapi-codegen/v2/cmd/oapi-codegen@latest \
+		-generate "client" \
+		-o /dev/stdout \
+		-package api $< \
+		> $@
 
 openapi.json: api-gen $(SCHEMAS) $(API_SCHEMAS)
 	./api-gen api/openapi.json >$@

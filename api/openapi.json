@@ -6,7 +6,7 @@
     "version": "0.0.1"
   },
   "paths": {
-    "/v1/user/init": {
+    "/v1/user/init/": {
       "get": {
         "summary": "Get everything",
         "responses": {
@@ -17,12 +17,12 @@
                 "schema": {
                   "allOf": [
                     {
-                      "$ref": "#/components/schemas/Response"
+                      "$ref": "../schemas/response.json"
                     },
                     {
                       "properties": {
                         "data": {
-                          "$ref": "./v1/user/init/get-200-content.json"
+                          "$ref": "./v1/user/init/get-v1-user-init-200-body.json"
                         }
                       }
                     }
@@ -31,23 +31,6 @@
               }
             }
           }
-        }
-      }
-    }
-  },
-  "components": {
-    "schemas": {
-      "Response": {
-        "type": "object",
-        "additionalProperties": true,
-        "required": [
-          "status"
-        ],
-        "properties": {
-          "status": {
-            "type": "integer"
-          },
-          "data": {}
         }
       }
     }
