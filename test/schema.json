@@ -1,0 +1,99 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "customer"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "customer": {
+      "$ref": "#/definitions/Customer"
+    },
+    "proxies": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/HttpProxy"
+      }
+    }
+  },
+  "definitions": {
+    "Customer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "auth",
+        "cache"
+      ],
+      "properties": {
+        "auth": {
+          "$ref": "#/definitions/Auth"
+        },
+        "cache": {
+          "$ref": "#/definitions/CustomerCache"
+        }
+      }
+    },
+    "CustomerCache": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "cookies"
+      ],
+      "properties": {
+        "cookies": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "array",
+              "items": {}
+            }
+          ]
+        }
+      }
+    },
+    "Auth": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "username",
+        "password"
+      ],
+      "properties": {
+        "proxy": {
+          "type": "string"
+        },
+        "username": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+    "HttpProxy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "username",
+        "password",
+        "address"
+      ],
+      "properties": {
+        "username": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

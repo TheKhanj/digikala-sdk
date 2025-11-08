@@ -7,6 +7,7 @@ import (
 
 	"github.com/chromedp/cdproto/network"
 	"github.com/chromedp/chromedp"
+	"github.com/thekhanj/digikala-sdk/api"
 )
 
 const (
@@ -26,7 +27,7 @@ type Auth struct {
 func (this *Auth) LoginWithContext(
 	ctx context.Context,
 	username, password string,
-) ([]http.Cookie, error) {
+) ([]*http.Cookie, error) {
 	subctx, cancel := context.WithCancel(this.tab)
 
 	returned := make(chan struct{})
@@ -46,14 +47,14 @@ func (this *Auth) LoginWithContext(
 	return this.login(subctx, username, password)
 }
 
-func (this *Auth) Login(username, password string) ([]http.Cookie, error) {
+func (this *Auth) Login(username, password string) ([]*http.Cookie, error) {
 	return this.LoginWithContext(context.Background(), username, password)
 }
 
 func (this *Auth) login(
 	ctx context.Context,
 	username, password string,
-) ([]http.Cookie, error) {
+) ([]*http.Cookie, error) {
 	err := this.openLoginPage(ctx)
 	if err != nil {
 		return nil, err
@@ -105,22 +106,14 @@ func (this *Auth) submitPassword(
 
 func (this *Auth) pullCookies(
 	ctx context.Context,
-) ([]http.Cookie, error) {
-	ret := make([]http.Cookie, 0)
+) ([]*http.Cookie, error) {
+	ret := make([]*http.Cookie, 0)
 
 	err := chromedp.Run(ctx,
 		chromedp.Sleep(this.readyDelay),
 		chromedp.ActionFunc(func(ctx context.Context) error {
 			cookies, err := network.GetCookies().
-				WithURLs([]string{
-					"https://digikala.com",
-					"https://www.digikala.com",
-					"https://.digikala.com",
-					"https://api.digikala.com",
-					"https://.api.digikala.com",
-					"https://tracker.digikala.com",
-					"https://.api-dwid.digiwise.ir",
-				}).
+				WithURLs(api.CookiesUrls).
 				Do(ctx)
 			if err != nil {
 				return err
@@ -134,7 +127,7 @@ func (this *Auth) pullCookies(
 					Domain: c.Domain,
 					Secure: c.Secure,
 				}
-				ret = append(ret, adapted)
+				ret = append(ret, &adapted)
 			}
 
 			return nil

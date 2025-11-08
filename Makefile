@@ -48,3 +48,9 @@ $(GO_CONFIG): $(CONFIG_SCHEMA)
 	cp $< $$dir/config && \
 	go-jsonschema -p config $$dir/config >$@; \
 	rm $$dir -r
+
+test/config/config: test/schema.json
+	cat $< >$@
+
+test/config/config.go: test/config/config
+	go run github.com/atombender/go-jsonschema@latest -p config $< > $@

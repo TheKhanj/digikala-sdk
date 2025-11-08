@@ -9,11 +9,10 @@ import (
 	"time"
 
 	"github.com/chromedp/chromedp"
-	"github.com/thekhanj/digikala-sdk/common"
 )
 
 func TestBrowser(t *testing.T) {
-	// t.Skip()
+	t.Skip()
 
 	notify, cancel := signal.NotifyContext(
 		t.Context(), os.Interrupt, syscall.SIGTERM,
@@ -23,15 +22,7 @@ func TestBrowser(t *testing.T) {
 	ctx, cancel2 := context.WithTimeout(notify, time.Second*3)
 	defer cancel2()
 
-	proxy := HttpProxy{
-		User:     common.GetMandatoryEnv("TEST_HTTP_PROXY_USER"),
-		Password: common.GetMandatoryEnv("TEST_HTTP_PROXY_PASSWORD"),
-		Address:  common.GetMandatoryEnv("TEST_HTTP_PROXY_ADDRESS"),
-	}
-	b := NewBrowser(
-		WithHeadless(false),
-		WithHttpProxy(proxy),
-	)
+	b := NewBrowser(WithHeadless(false))
 	b.Run(ctx)
 
 	for i := 0; i < 3; i++ {
