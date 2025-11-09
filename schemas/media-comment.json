@@ -1,0 +1,166 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema",
+  "additionalProperties": true,
+  "required": [
+    "id",
+    "title",
+    "body",
+    "created_at",
+    "rate",
+    "reactions",
+    "files",
+    "is_buyer",
+    "user_name",
+    "is_anonymous",
+    "purchased_item",
+    "advantages",
+    "disadvantages",
+    "user_reactions",
+    "relative_date",
+    "social_profile",
+    "contribution_badge"
+  ],
+  "properties": {
+    "id": {
+      "type": "integer"
+    },
+    "title": {
+      "type": "string"
+    },
+    "body": {
+      "type": "string"
+    },
+    "created_at": {
+      "type": "string"
+    },
+    "rate": {
+      "type": "integer"
+    },
+    "reactions": {
+      "$ref": "./comment-reactions.json"
+    },
+    "files": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/File"
+      }
+    },
+    "is_buyer": {
+      "type": "boolean"
+    },
+    "user_name": {
+      "type": "string"
+    },
+    "is_anonymous": {
+      "type": "boolean"
+    },
+    "purchased_item": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "seller",
+        "color"
+      ],
+      "properties": {
+        "seller": {
+          "$ref": "./seller.json"
+        },
+        "color": {
+          "type": "object",
+          "additionalProperties": true,
+          "required": [
+            "id",
+            "title",
+            "hex_code"
+          ],
+          "properties": {
+            "id": {
+              "type": "integer"
+            },
+            "title": {
+              "type": "string"
+            },
+            "hex_code": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "advantages": {
+      "type": "array",
+      "items": {},
+      "description": "TODO"
+    },
+    "disadvantages": {
+      "type": "array",
+      "items": {},
+      "description": "TODO"
+    },
+    "user_reactions": {
+      "type": "array",
+      "items": {},
+      "description": "TODO"
+    },
+    "relative_date": {
+      "type": "string"
+    },
+    "social_profile": {
+      "type": "array",
+      "items": {},
+      "description": "TODO"
+    },
+    "contribution_badge": {
+      "type": "array",
+      "items": {},
+      "description": "TODO"
+    }
+  },
+  "definitions": {
+    "File": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [],
+      "properties": {
+        "storage_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "url": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "thumbnail_url": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "temporary_id": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "description": "TODO"
+            }
+          ]
+        },
+        "webp_url": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "description": "TODO"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,133 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "order_item_id",
+    "product_id",
+    "rate",
+    "review_user_type",
+    "is_anonymous",
+    "user_id",
+    "id",
+    "body",
+    "status",
+    "reactions",
+    "advantages",
+    "disadvantages",
+    "is_buyer",
+    "user_name",
+    "created_at",
+    "files",
+    "user_reactions",
+    "social_profile",
+    "relative_date"
+  ],
+  "properties": {
+    "order_item_id": {
+      "type": "integer"
+    },
+    "product_id": {
+      "type": "integer"
+    },
+    "rate": {
+      "type": "integer"
+    },
+    "review_user_type": {
+      "type": "string"
+    },
+    "is_anonymous": {
+      "type": "boolean"
+    },
+    "user_id": {
+      "type": "integer"
+    },
+    "id": {
+      "type": "integer"
+    },
+    "body": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "examples": [
+        "approved"
+      ]
+    },
+    "reactions": {
+      "$ref": "./comment-reactions.json"
+    },
+    "advantages": {
+      "type": "array",
+      "items": {}
+    },
+    "disadvantages": {
+      "type": "array",
+      "items": {}
+    },
+    "is_buyer": {
+      "type": "integer"
+    },
+    "user_name": {
+      "type": "string"
+    },
+    "created_at": {
+      "type": "string"
+    },
+    "files": {
+      "type": "array",
+      "items": {}
+    },
+    "user_reactions": {
+      "type": "array",
+      "items": {}
+    },
+    "social_profile": {
+      "type": "object",
+      "additionalProperties": true,
+      "description": "Might wanna merge this with init request's social profile",
+      "required": [
+        "username",
+        "bio",
+        "photo",
+        "name",
+        "followings_count",
+        "followers_count",
+        "share_url"
+      ],
+      "properties": {
+        "username": {
+          "type": "string"
+        },
+        "bio": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "description": "TODO"
+            }
+          ]
+        },
+        "photo": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "followings_count": {
+          "type": "integer"
+        },
+        "followers_count": {
+          "type": "integer"
+        },
+        "share_url": {
+          "type": "string"
+        }
+      }
+    },
+    "relative_date": {
+      "type": "string"
+    }
+  }
+}

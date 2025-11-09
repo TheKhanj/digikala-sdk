@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "comments",
+    "intent_data",
+    "media_comments",
+    "sort",
+    "sort_options",
+    "pager"
+  ],
+  "properties": {
+    "comments": {
+      "type": "array",
+      "items": {
+        "$ref": "../../../../schemas/comment.json"
+      }
+    },
+    "intent_data": {
+      "type": "array",
+      "items": {}
+    },
+    "media_comments": {
+      "type": "array",
+      "items": {
+        "$ref": "../../../../schemas/media-comment.json"
+      }
+    },
+    "sort": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "default": {
+          "type": "string",
+          "examples": [
+            "default"
+          ]
+        }
+      }
+    },
+    "sort_options": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true,
+        "properties": {
+          "id": {
+            "type": "string",
+            "examples": [
+              "newest",
+              "buyers",
+              "default"
+            ]
+          },
+          "title": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "pager": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "current_page": {
+          "type": "integer"
+        },
+        "total_pages": {
+          "type": "integer"
+        },
+        "total_items": {
+          "type": "integer"
+        }
+      }
+    }
+  }
+}

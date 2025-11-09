@@ -7,16 +7,19 @@ require (
 	github.com/chromedp/chromedp v0.14.2
 	github.com/go-viper/mapstructure/v2 v2.4.0
 	github.com/moul/http2curl v1.0.0
+	github.com/oapi-codegen/runtime v1.1.2
 	github.com/thekhanj/go-jq v0.0.0-20251104082910-f2caab7b1b04
 	golang.org/x/net v0.40.0
 )
 
 require (
+	github.com/apapsch/go-jsonmerge/v2 v2.0.0 // indirect
 	github.com/chromedp/sysutil v1.1.0 // indirect
 	github.com/go-json-experiment/json v0.0.0-20250725192818-e39067aee2d2 // indirect
 	github.com/gobwas/httphead v0.1.0 // indirect
 	github.com/gobwas/pool v0.2.1 // indirect
 	github.com/gobwas/ws v1.4.0 // indirect
+	github.com/google/uuid v1.5.0 // indirect
 	github.com/smartystreets/goconvey v1.8.1 // indirect
 	golang.org/x/sys v0.37.0 // indirect
 )

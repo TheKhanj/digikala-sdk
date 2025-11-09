@@ -1,0 +1,145 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema",
+  "additionalProperties": true,
+  "required": [
+    "id",
+    "title",
+    "code",
+    "url",
+    "rating",
+    "properties",
+    "stars",
+    "grade",
+    "logo"
+  ],
+  "properties": {
+    "id": {
+      "type": "integer"
+    },
+    "title": {
+      "type": "string"
+    },
+    "code": {
+      "type": "string"
+    },
+    "url": {
+      "type": "string"
+    },
+    "rating": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "total_rate",
+        "total_count",
+        "commitment",
+        "no_return",
+        "on_time_shipping"
+      ],
+      "properties": {
+        "total_rate": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "description": "TODO"
+            }
+          ]
+        },
+        "total_count": {
+          "type": "integer"
+        },
+        "commitment": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "description": "TODO"
+            }
+          ]
+        },
+        "no_return": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "description": "TODO"
+            }
+          ]
+        },
+        "on_time_shipping": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "description": "TODO"
+            }
+          ]
+        }
+      }
+    },
+    "properties": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "is_trusted",
+        "is_official",
+        "is_roosta",
+        "is_new"
+      ],
+      "properties": {
+        "is_trusted": {
+          "type": "boolean"
+        },
+        "is_official": {
+          "type": "boolean"
+        },
+        "is_roosta": {
+          "type": "boolean"
+        },
+        "is_new": {
+          "type": "boolean"
+        }
+      }
+    },
+    "stars": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "description": "TODO"
+        }
+      ]
+    },
+    "grade": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "label",
+        "color"
+      ],
+      "properties": {
+        "label": {
+          "type": "string"
+        },
+        "color": {
+          "type": "string"
+        }
+      }
+    },
+    "logo": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "description": "TODO"
+        }
+      ]
+    }
+  }
+}

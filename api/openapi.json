@@ -5,6 +5,11 @@
     "title": "Digikala API",
     "version": "0.0.1"
   },
+  "servers": [
+    {
+      "url": "https://api.digikala.com"
+    }
+  ],
   "paths": {
     "/v1/user/init/": {
       "get": {
@@ -22,7 +27,108 @@
                     {
                       "properties": {
                         "data": {
-                          "$ref": "./v1/user/init/get-v1-user-init-200-body.json"
+                          "$ref": "./v1/user/init/get-v1-user-init-200-data.json"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/rate-review/products/{product_id}/submit/": {
+      "post": {
+        "summary": "Submit a comment",
+        "parameters": [
+          {
+            "name": "product_id",
+            "schema": {
+              "type": "integer"
+            },
+            "in": "path",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "./v1/rate-review/products/submit/post-v1-rate-review-products-submit-body.json"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Submit a comment",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "../schemas/response.json"
+                    },
+                    {
+                      "description": "TODO"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/rate-review/products/{product_id}/": {
+      "get": {
+        "summary": "Get comments",
+        "parameters": [
+          {
+            "name": "product_id",
+            "schema": {
+              "type": "integer"
+            },
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "sort",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "newest"
+              ]
+            },
+            "in": "query",
+            "required": false
+          },
+          {
+            "name": "page",
+            "schema": {
+              "type": "integer",
+              "description": "Starts with 1"
+            },
+            "in": "query",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of comments",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "../schemas/response.json"
+                    },
+                    {
+                      "properties": {
+                        "data": {
+                          "$ref": "./v1/rate-review/products/get-v1-rate-review-200-data.json"
                         }
                       }
                     }
