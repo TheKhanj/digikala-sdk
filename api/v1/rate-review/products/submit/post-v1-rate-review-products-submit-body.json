@@ -3,7 +3,6 @@
   "type": "object",
   "additionalProperties": true,
   "required": [
-    "order_item_id",
     "rating",
     "comment",
     "temporary_media_ids",
@@ -12,7 +11,7 @@
   ],
   "properties": {
     "order_item_id": {
-      "type": "null"
+      "description": "TODO"
     },
     "rating": {
       "type": "integer",

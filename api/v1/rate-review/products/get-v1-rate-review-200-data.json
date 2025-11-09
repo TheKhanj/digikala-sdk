@@ -33,9 +33,7 @@
       "properties": {
         "default": {
           "type": "string",
-          "examples": [
-            "default"
-          ]
+          "description": "(default|TODO?)"
         }
       }
     },
@@ -47,11 +45,12 @@
         "properties": {
           "id": {
             "type": "string",
-            "examples": [
+            "enum": [
               "newest",
               "buyers",
               "default"
-            ]
+            ],
+            "description": "TODO: more enums"
           },
           "title": {
             "type": "string"

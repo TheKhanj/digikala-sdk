@@ -50,9 +50,7 @@
     },
     "status": {
       "type": "string",
-      "examples": [
-        "approved"
-      ]
+      "description": "(approved|TODO?)"
     },
     "reactions": {
       "$ref": "./comment-reactions.json"
@@ -88,7 +86,6 @@
       "description": "Might wanna merge this with init request's social profile",
       "required": [
         "username",
-        "bio",
         "photo",
         "name",
         "followings_count",
@@ -100,14 +97,7 @@
           "type": "string"
         },
         "bio": {
-          "oneOf": [
-            {
-              "type": "null"
-            },
-            {
-              "description": "TODO"
-            }
-          ]
+          "description": "TODO"
         },
         "photo": {
           "type": "string"

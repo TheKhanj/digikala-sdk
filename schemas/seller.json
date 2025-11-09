@@ -8,9 +8,7 @@
     "url",
     "rating",
     "properties",
-    "stars",
-    "grade",
-    "logo"
+    "grade"
   ],
   "properties": {
     "id": {
@@ -29,55 +27,23 @@
       "type": "object",
       "additionalProperties": true,
       "required": [
-        "total_rate",
-        "total_count",
-        "commitment",
-        "no_return",
-        "on_time_shipping"
+        "total_count"
       ],
       "properties": {
         "total_rate": {
-          "oneOf": [
-            {
-              "type": "null"
-            },
-            {
-              "description": "TODO"
-            }
-          ]
+          "description": "TODO"
         },
         "total_count": {
           "type": "integer"
         },
         "commitment": {
-          "oneOf": [
-            {
-              "type": "null"
-            },
-            {
-              "description": "TODO"
-            }
-          ]
+          "description": "TODO"
         },
         "no_return": {
-          "oneOf": [
-            {
-              "type": "null"
-            },
-            {
-              "description": "TODO"
-            }
-          ]
+          "description": "TODO"
         },
         "on_time_shipping": {
-          "oneOf": [
-            {
-              "type": "null"
-            },
-            {
-              "description": "TODO"
-            }
-          ]
+          "description": "TODO"
         }
       }
     },
@@ -106,14 +72,7 @@
       }
     },
     "stars": {
-      "oneOf": [
-        {
-          "type": "null"
-        },
-        {
-          "description": "TODO"
-        }
-      ]
+      "description": "TODO"
     },
     "grade": {
       "type": "object",
@@ -132,14 +91,7 @@
       }
     },
     "logo": {
-      "oneOf": [
-        {
-          "type": "null"
-        },
-        {
-          "description": "TODO"
-        }
-      ]
+      "description": "TODO"
     }
   }
 }

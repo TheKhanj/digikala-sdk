@@ -120,7 +120,11 @@
     "File": {
       "type": "object",
       "additionalProperties": true,
-      "required": [],
+      "required": [
+        "storage_ids",
+        "url",
+        "thumbnail_url"
+      ],
       "properties": {
         "storage_ids": {
           "type": "array",
@@ -141,24 +145,10 @@
           }
         },
         "temporary_id": {
-          "oneOf": [
-            {
-              "type": "null"
-            },
-            {
-              "description": "TODO"
-            }
-          ]
+          "description": "TODO"
         },
         "webp_url": {
-          "oneOf": [
-            {
-              "type": "null"
-            },
-            {
-              "description": "TODO"
-            }
-          ]
+          "description": "TODO"
         }
       }
     }
