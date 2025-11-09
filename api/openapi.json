@@ -10,6 +10,13 @@
       "url": "https://api.digikala.com"
     }
   ],
+  "components": {
+    "schemas": {
+      "A": {
+        "$ref": "./v1/rate-review/products/get-req-params.json"
+      }
+    }
+  },
   "paths": {
     "/v1/user/init/": {
       "get": {

@@ -81,40 +81,49 @@
       "items": {}
     },
     "social_profile": {
-      "type": "object",
-      "additionalProperties": true,
-      "description": "Might wanna merge this with init request's social profile",
-      "required": [
-        "username",
-        "photo",
-        "name",
-        "followings_count",
-        "followers_count",
-        "share_url"
-      ],
-      "properties": {
-        "username": {
-          "type": "string"
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {},
+          "description": "That empty array idiotic thing that Digikala's API does typically"
         },
-        "bio": {
-          "description": "TODO"
-        },
-        "photo": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "followings_count": {
-          "type": "integer"
-        },
-        "followers_count": {
-          "type": "integer"
-        },
-        "share_url": {
-          "type": "string"
+        {
+          "type": "object",
+          "additionalProperties": true,
+          "description": "Might wanna merge this with init request's social profile",
+          "required": [
+            "username",
+            "photo",
+            "name",
+            "followings_count",
+            "followers_count",
+            "share_url"
+          ],
+          "properties": {
+            "username": {
+              "type": "string"
+            },
+            "bio": {
+              "description": "TODO"
+            },
+            "photo": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "followings_count": {
+              "type": "integer"
+            },
+            "followers_count": {
+              "type": "integer"
+            },
+            "share_url": {
+              "type": "string"
+            }
+          }
         }
-      }
+      ]
     },
     "relative_date": {
       "type": "string"

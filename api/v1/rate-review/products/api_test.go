@@ -14,7 +14,9 @@ func TestFetchingComments(t *testing.T) {
 	}
 
 	iphoneId := 20481189
-	res, err := client.GetV1RateReviewProductsProductIdWithResponse(t.Context(), iphoneId)
+	res, err := client.GetV1RateReviewProductsProductIdWithResponse(
+		t.Context(), iphoneId, nil,
+	)
 	if err != nil {
 		t.Fatal(err)
 		return
