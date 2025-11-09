@@ -7,6 +7,8 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
+
+	"github.com/thekhanj/digikala-sdk/common"
 )
 
 type Schema any
@@ -172,8 +174,29 @@ func (this *Parser) getSchemaNameFromLocalRef(ref string) string {
 }
 
 func (this *Parser) getSchemaNameFromFilePathRef(ref string) string {
-	base := filepath.Base(ref)
 	ret := ""
+
+	base := filepath.Base(ref)
+	fullpath := filepath.Join(this.cwd, ref)
+
+	root := common.GetProjectRoot() + "/api"
+	// api schemas
+	if strings.HasPrefix(fullpath, root) {
+		relPath := strings.Replace(fullpath, root, "", 1)
+
+		parts := strings.Split(base, "-")
+		method := parts[0]
+
+		arr := []string{method}
+		arr = append(
+			arr,
+			strings.Split(filepath.Dir(relPath), "/")...,
+		)
+		arr = append(arr, parts[1:]...)
+
+		base = strings.Join(arr, "-")
+	}
+
 	for i := 0; i < len(base); {
 		c := base[i]
 		if c == '-' || i == 0 {

@@ -3,32 +3,12 @@ package internal
 import (
 	"errors"
 	"fmt"
-	"log"
 	"os"
 	"path"
-	"path/filepath"
 	"syscall"
+
+	"github.com/thekhanj/digikala-sdk/common"
 )
-
-func GetProjectRoot() string {
-	dir, err := os.Getwd()
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	for {
-		goModPath := filepath.Join(dir, "go.mod")
-		if _, err := os.Stat(goModPath); err == nil {
-			return dir
-		}
-
-		if dir == filepath.Dir(dir) {
-			log.Fatalf("go.mod not found in any parent directories")
-		}
-
-		dir = filepath.Dir(dir)
-	}
-}
 
 func GetAbsPath(name string) string {
 	env := os.Getenv("env")
@@ -41,7 +21,7 @@ func GetAbsPath(name string) string {
 		return name
 	}
 
-	return path.Join(GetProjectRoot(), name)
+	return path.Join(common.GetProjectRoot(), name)
 }
 
 func AssertAtLeastOneFile(dir string) error {
