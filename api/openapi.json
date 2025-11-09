@@ -13,6 +13,9 @@
   "paths": {
     "/v1/user/init/": {
       "get": {
+        "tags": [
+          "User"
+        ],
         "summary": "Get everything",
         "responses": {
           "200": {
@@ -42,6 +45,9 @@
     "/v1/rate-review/products/{product_id}/submit/": {
       "post": {
         "summary": "Submit a comment",
+        "tags": [
+          "Comment"
+        ],
         "parameters": [
           {
             "name": "product_id",
@@ -85,6 +91,9 @@
     "/v1/rate-review/products/{product_id}/": {
       "get": {
         "summary": "Get comments",
+        "tags": [
+          "Comment"
+        ],
         "parameters": [
           {
             "name": "product_id",
