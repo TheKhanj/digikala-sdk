@@ -2,6 +2,7 @@ package parser
 
 import (
 	"encoding/json"
+	"path/filepath"
 	"testing"
 )
 
@@ -12,7 +13,9 @@ func TestParser(t *testing.T) {
 		return
 	}
 
-	ret, err := p.ParseFile("openapi.json")
+	ret, err := p.ParseFile(
+		filepath.Join("../../openapi/openapi.json"),
+	)
 	if err != nil {
 		t.Fatal(err)
 		return

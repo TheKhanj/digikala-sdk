@@ -1,133 +1,56 @@
 package main
 
 import (
-	"errors"
-	"flag"
+	"encoding/json"
 	"fmt"
 	"os"
-	"time"
 
-	"github.com/thekhanj/digikala-sdk/cli/config"
-	"github.com/thekhanj/digikala-sdk/cli/fetch"
-	"github.com/thekhanj/digikala-sdk/cli/proxy"
+	"github.com/thekhanj/digikala-sdk/schemas/parser"
 )
 
-type Cli struct {
-	config *config.Config
+const (
+	CODE_SUCCESS int = iota
+	CODE_GENERAL_ERROR
+)
+
+func parseFile(filePath string) error {
+	p, err := parser.NewParser()
+	if err != nil {
+		return err
+	}
+
+	ret, err := p.ParseFile(filePath)
+	if err != nil {
+		return err
+	}
+	p.SetSchemas(ret)
+
+	b, err := json.MarshalIndent(ret, "", "  ")
+	if err != nil {
+		return err
+	}
+	fmt.Println(string(b))
+	return nil
 }
 
-func (this *Cli) Run() Exit {
-	var flags *flag.FlagSet
-	if len(os.Args) == 0 {
-		flags = flag.NewFlagSet("", flag.ExitOnError)
-	} else {
-		flags = flag.NewFlagSet(os.Args[0], flag.ExitOnError)
+func main() {
+	if len(os.Args) < 2 {
+		fmt.Fprintln(os.Stderr, "error: Not enough arguments")
+		os.Exit(CODE_GENERAL_ERROR)
+		return
 	}
 
-	configPath := flags.String("c", "config.json", "path to config file")
-	flags.Parse(os.Args[1:])
+	if len(os.Args) > 2 {
+		fmt.Fprintln(os.Stderr, "error: Extra argument:", os.Args[2])
+		os.Exit(CODE_GENERAL_ERROR)
+		return
+	}
 
-	c, err := config.ReadConfig(*configPath)
+	filePath := os.Args[1]
+
+	err := parseFile(filePath)
 	if err != nil {
-		return NewExit(err, CODE_READING_CONFIG_ERROR)
+		fmt.Fprintf(os.Stderr, "error: %v", err)
+		os.Exit(CODE_GENERAL_ERROR)
 	}
-
-	this.config = c
-	return this.handleCommand(flags.Args())
-}
-
-func (this *Cli) handleCommand(args []string) Exit {
-	if len(args) == 0 {
-		return NewHelpfulExit(
-			errors.New("missing command"), CODE_BAD_INVOCATION_ERROR,
-		)
-	}
-
-	cmd := args[0]
-
-	switch cmd {
-	case "fetch":
-		return this.handleFetch(args[1:])
-	case "gen-schema":
-		return this.handleGenSchema(args[1:])
-	default:
-		return NewHelpfulExit(
-			fmt.Errorf("invalid command: %s", cmd),
-			CODE_BAD_INVOCATION_ERROR,
-		)
-	}
-}
-
-func (this *Cli) handleFetch(args []string) Exit {
-	msg := `Try:
-  digi fetch products`
-
-	if len(args) == 0 {
-		return NewMsgExit(
-			errors.New("missing subcommand for fetch"),
-			CODE_BAD_INVOCATION_ERROR, msg,
-		)
-	}
-
-	subcmd := args[0]
-
-	switch subcmd {
-	case "products":
-		return this.handleFetchProducts()
-	default:
-		return NewMsgExit(
-			fmt.Errorf("invalid subcommand for fetch: %s", subcmd),
-			CODE_BAD_INVOCATION_ERROR, msg,
-		)
-	}
-}
-
-func (this *Cli) handleGenSchema(args []string) Exit {
-	return this.notImplemented()
-}
-
-func (this *Cli) notImplemented() Exit {
-	return NewExit(
-		errors.New("not implemented"), CODE_NOT_IMPLEMENTED_ERROR,
-	)
-}
-
-func (this *Cli) handleFetchProducts() Exit {
-	proxies, err := this.config.Api.Client.GetProxies()
-	if err != nil {
-		return NewExit(err, CODE_INVALID_CONFIG_ERROR)
-	}
-
-	clients, err := proxy.NewProxyClientList(proxies)
-	if err != nil {
-		return NewExit(err, CODE_INVALID_CONFIG_ERROR)
-	}
-
-	pool, err := proxy.NewClientPool(
-		time.Duration(this.config.Api.Client.RateLimit), clients...,
-	)
-	if err != nil {
-		return NewExit(err, CODE_INVALID_CONFIG_ERROR)
-	}
-	defer func() {
-		stopped := pool.Shutdown()
-		<-stopped
-	}()
-
-	urls, err := this.config.Api.Fetch.GetProductsApiUrls()
-	if err != nil {
-		return NewExit(err, CODE_INVALID_CONFIG_ERROR)
-	}
-
-	p, err := fetch.NewProducts(pool, urls, ".cache/fetch/products")
-	if err != nil {
-		return NewExit(err, CODE_GENERAL_ERROR)
-	}
-
-	err = p.Fetch()
-	if err != nil {
-		return NewExit(err, CODE_GENERAL_ERROR)
-	}
-
-	return NewExit(nil, CODE_SUCCESS)
 }

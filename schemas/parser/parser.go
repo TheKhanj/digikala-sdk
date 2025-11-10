@@ -179,7 +179,7 @@ func (this *Parser) getSchemaNameFromFilePathRef(ref string) string {
 	base := filepath.Base(ref)
 	fullpath := filepath.Join(this.cwd, ref)
 
-	root := common.GetProjectRoot() + "/api"
+	root := common.GetProjectRoot() + "/openapi/api"
 	// api schemas
 	if strings.HasPrefix(fullpath, root) {
 		relPath := strings.Replace(fullpath, root, "", 1)

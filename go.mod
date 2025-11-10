@@ -8,8 +8,6 @@ require (
 	github.com/go-viper/mapstructure/v2 v2.4.0
 	github.com/moul/http2curl v1.0.0
 	github.com/oapi-codegen/runtime v1.1.2
-	github.com/thekhanj/go-jq v0.0.0-20251104082910-f2caab7b1b04
-	golang.org/x/net v0.40.0
 )
 
 require (

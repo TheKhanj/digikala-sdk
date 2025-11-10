@@ -14,7 +14,7 @@
     "comments": {
       "type": "array",
       "items": {
-        "$ref": "../../../../schemas/comment.json"
+        "$ref": "../../../../../schemas/comment.json"
       }
     },
     "intent_data": {
@@ -24,7 +24,7 @@
     "media_comments": {
       "type": "array",
       "items": {
-        "$ref": "../../../../schemas/media-comment.json"
+        "$ref": "../../../../../schemas/media-comment.json"
       }
     },
     "sort": {

@@ -1,45 +1,39 @@
-CONFIG_SCHEMA = config-schema.json
-
-GO_CONFIG = cli/config/dto.go
-GO_SRC_FILES = $(shell find cli -name '*.go') \
-							 $(wildcard *.go) $(GO_CONFIG)
+BUILD_DIR = build
 
 SCHEMAS = $(shell find schemas -name '*.json')
-API_SCHEMAS = $(shell find api -name '*.json')
-API_GO_SRC_FILES = $(shell find api -name '*.go' | grep -v 'api.go' | grep -v 'schemas.go')
+API_SCHEMAS = $(shell find openapi/api -name '*.json')
+GO_SRC_FILES = $(shell find . -name '*.go' | grep -v 'api/api.go' | grep -v 'api/schemas.go')
 
-all: cli openapi.json
-
-cli: bin/cli
-
-bin/cli: $(GO_SRC_FILES)
-	go build -o ./bin/cli ./cli
-
-go-config: $(GO_CONFIG)
+all: openapi api
 
 .PHONY: clean
-clean: clean-go-config
+clean: clean_cli clean_api clean_openapi clean_test
+	rm $(BUILD_DIR) -r
 
-.PHONY: clean-go-config
-clean-go-config:
-	rm $(GO_CONFIG)
+$(BUILD_DIR):
+	mkdir $@
+
+cli: $(BUILD_DIR)/cli
+.PHONY: clean_cli
+clean_cli:
+	rm $(BUILD_DIR)/cli
+
+$(BUILD_DIR)/cli: $(GO_SRC_FILES)
+	go build -o $@ ./cli
 
 api: api/api.go api/schemas.go
+.PHONY: clean_api
+clean_api:
+	rm api/api.go api/schemas.go api/schemas
 
-api-gen: $(API_GO_SRC_FILES)
-	go build -o $@ ./api/cli
-
-api/api.go: openapi.json
+api/api.go: api $(BUILD_DIR)/openapi.json
 	go run github.com/oapi-codegen/oapi-codegen/v2/cmd/oapi-codegen@latest \
 		-generate "client" \
 		-o /dev/stdout \
 		-package api $< \
 		> $@
 
-openapi.json: api-gen $(SCHEMAS) $(API_SCHEMAS)
-	./api-gen api/openapi.json >$@
-
-api/schemas: openapi.json
+api/schemas: $(BUILD_DIR)/openapi.json
 	cat $< \
 		| jq '{ "type": "object", "definitions": .components.schemas }' \
 		| sed 's|/components/schemas|/definitions|' > $@
@@ -47,11 +41,18 @@ api/schemas: openapi.json
 api/schemas.go: api/schemas
 	go run github.com/atombender/go-jsonschema@latest -p api $< > $@
 
-$(GO_CONFIG): $(CONFIG_SCHEMA)
-	dir=$$(mktemp -d) && \
-	cp $< $$dir/config && \
-	go-jsonschema -p config $$dir/config >$@; \
-	rm $$dir -r
+openapi: $(BUILD_DIR)/openapi.json
+.PHONY: clean_openapi
+clean_openapi:
+	rm $(BUILD_DIR)/openapi.json
+
+$(BUILD_DIR)/openapi.json: $(BUILD_DIR)/cli $(SCHEMAS) $(API_SCHEMAS)
+	$< openapi/openapi.json >$@
+
+test: test/config/config.go
+.PHONY: clean_test
+clean_test:
+	rm test/config/config.go test/config/config
 
 test/config/config: test/schema.json
 	cat $< >$@

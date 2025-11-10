@@ -1,8 +1,0 @@
-#!/usr/bin/env sh
-
-: "${client_proxy_count:=1}"
-
-for i in $(seq "$client_proxy_count"); do
-	name="client_proxy_$i"
-	eval "echo \$${name}"
-done

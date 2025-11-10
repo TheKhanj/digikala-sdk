@@ -13,7 +13,7 @@
   "components": {
     "schemas": {
       "A": {
-        "$ref": "./v1/rate-review/products/get-req-params.json"
+        "$ref": "./api/v1/rate-review/products/get-req-params.json"
       }
     }
   },
@@ -37,7 +37,7 @@
                     {
                       "properties": {
                         "data": {
-                          "$ref": "./v1/user/init/get-res-200-data.json"
+                          "$ref": "./api/v1/user/init/get-res-200-data.json"
                         }
                       }
                     }
@@ -69,7 +69,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "./v1/rate-review/products/submit/post-req-body.json"
+                "$ref": "./api/v1/rate-review/products/submit/post-req-body.json"
               }
             }
           }
@@ -144,7 +144,7 @@
                     {
                       "properties": {
                         "data": {
-                          "$ref": "./v1/rate-review/products/get-res-200-data.json"
+                          "$ref": "./api/v1/rate-review/products/get-res-200-data.json"
                         }
                       }
                     }

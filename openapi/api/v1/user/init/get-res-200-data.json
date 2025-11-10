@@ -38,10 +38,10 @@
       "description": "TODO"
     },
     "user": {
-      "$ref": "../../../../schemas/user.json"
+      "$ref": "../../../../../schemas/user.json"
     },
     "default_address": {
-      "$ref": "../../../../schemas/address.json"
+      "$ref": "../../../../../schemas/address.json"
     },
     "data_layer": {
       "type": "object",
@@ -49,7 +49,7 @@
       "description": "TODO"
     },
     "city": {
-      "$ref": "../../../../schemas/city.json"
+      "$ref": "../../../../../schemas/city.json"
     },
     "show_location_modal": {
       "type": "boolean"
@@ -86,12 +86,12 @@
       }
     },
     "cart": {
-      "$ref": "../../../../schemas/cart.json"
+      "$ref": "../../../../../schemas/cart.json"
     },
     "cart_items": {
       "type": "array",
       "items": {
-        "$ref": "../../../../schemas/cart-item.json"
+        "$ref": "../../../../../schemas/cart-item.json"
       }
     }
   }

@@ -1,7 +1,2 @@
-/.env
-/test/.cache
-/.cache
-/bin
-/openapi.json
-/api-gen
 /test-config.json
+/build
