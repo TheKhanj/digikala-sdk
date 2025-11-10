@@ -53,5 +53,13 @@ func TestInit(t *testing.T) {
 		return
 	}
 
-	t.Log(res.JSON200.Data)
+	data, err := res.GetJSON200Data()
+	if err != nil {
+		t.Fatal(err)
+	}
+	t.Log(data)
+
+	if _, ok := data.(*api.UserInitLoggedIn); !ok {
+		t.Fatal("Expected user to be logged in!")
+	}
 }
