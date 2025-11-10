@@ -64,7 +64,7 @@ func (this *TestEnv) CustomerAuthorize(
 	}
 
 	b := browser.NewBrowser(
-		browser.WithHeadless(true),
+		browser.WithHeadless(false),
 		func(b *browser.Browser) {
 			if p == nil {
 				return

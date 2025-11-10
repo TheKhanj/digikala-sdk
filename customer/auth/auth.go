@@ -110,7 +110,7 @@ func (this *Auth) pullCookies(
 	ret := make([]*http.Cookie, 0)
 
 	err := chromedp.Run(ctx,
-		chromedp.Sleep(this.readyDelay),
+		chromedp.Sleep(this.readyDelay*3),
 		chromedp.ActionFunc(func(ctx context.Context) error {
 			cookies, err := network.GetCookies().
 				WithURLs(api.CookiesUrls).
