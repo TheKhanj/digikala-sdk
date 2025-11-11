@@ -148,6 +148,7 @@ func WithReadyDelay(d time.Duration) AuthOption {
 	}
 }
 
+// TODO: assert dk_access_token cookie
 func NewAuth(tab context.Context, opts ...AuthOption) *Auth {
 	auth := &Auth{
 		tab: tab,

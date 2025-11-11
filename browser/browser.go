@@ -7,17 +7,12 @@ import (
 
 	"github.com/chromedp/cdproto/fetch"
 	"github.com/chromedp/chromedp"
+	"github.com/thekhanj/digikala-sdk/api/http"
 )
 
 var ErrInShutdown = errors.New("browser: In shutdown")
 
 type Proxy interface{}
-
-type HttpProxy struct {
-	User     string
-	Password string
-	Address  string
-}
 
 type BrowserOption = func(o *Browser)
 
@@ -27,7 +22,7 @@ func WithHeadless(headless bool) BrowserOption {
 	}
 }
 
-func WithHttpProxy(proxy HttpProxy) BrowserOption {
+func WithHttpProxy(proxy http.HttpProxy) BrowserOption {
 	return func(o *Browser) {
 		o.proxy = proxy
 	}
@@ -92,7 +87,7 @@ func (this *Browser) getAllocOptions() []chromedp.ExecAllocatorOption {
 		chromedp.Flag("enable-automation", false),
 		chromedp.Flag("window-size", "1080,524"),
 	}
-	if httpProxy, ok := this.proxy.(HttpProxy); ok {
+	if httpProxy, ok := this.proxy.(http.HttpProxy); ok {
 		allocOpts = append(allocOpts, chromedp.ProxyServer(httpProxy.Address))
 	}
 	if this.headless {
@@ -125,8 +120,8 @@ func (this *Browser) NewTab() (context.Context, error) {
 	tab, cancel := chromedp.NewContext(this.browserCtx)
 	_ = this.appendCancel(cancel)
 
-	if httpProxy, ok := this.proxy.(HttpProxy); ok {
-		this.addProxyAuth(tab, httpProxy.User, httpProxy.Password)
+	if httpProxy, ok := this.proxy.(http.HttpProxy); ok {
+		this.addProxyAuth(tab, httpProxy.Username, httpProxy.Password)
 		err := chromedp.Run(tab, fetch.Enable().WithHandleAuthRequests(true))
 		if err != nil {
 			return nil, err

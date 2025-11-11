@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"net/http"
 
+	h "github.com/thekhanj/digikala-sdk/api/http"
 	"github.com/thekhanj/digikala-sdk/browser"
 	"github.com/thekhanj/digikala-sdk/customer/auth"
 	"github.com/thekhanj/digikala-sdk/test/config"
@@ -74,8 +75,8 @@ func (this *TestEnv) CustomerAuthorize(
 			password := testProxy.Password
 			address := testProxy.Address
 
-			proxy := browser.HttpProxy{
-				User: user, Password: password, Address: address,
+			proxy := h.HttpProxy{
+				Username: user, Password: password, Address: address,
 			}
 			browser.WithHttpProxy(proxy)(b)
 		},
